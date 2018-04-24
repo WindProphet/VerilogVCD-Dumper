@@ -1,5 +1,9 @@
-from . import Dumper
-from . import Parser
+'Verilog VCD Dumper'
+from . import dumper
+from . import parser
+from . import tikz
 
-VerilogVCD = Parser.VerilogVCD
-VCDDumper = Dumper.VCDDumper
+VerilogVCD = parser.VerilogVCD
+VCDDumper = dumper.VCDDumper
+# pylint: disable=C0103
+apply = dumper.VCDDumper.from_setting

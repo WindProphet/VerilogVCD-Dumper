@@ -1,5 +1,7 @@
 "Dump Verilog Wave"
 
+# pylint: disable=all
+
 import re
 import io
 
