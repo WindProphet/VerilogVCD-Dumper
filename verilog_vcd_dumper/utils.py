@@ -1,6 +1,9 @@
 'utils for dumper'
 import re
 
+from . import disp_func
+DISP_LIST = disp_func.DISP_LIST
+
 IDENTITY_REGEXP = re.compile(r"^(.*?)(?:\[(.*?)\])?$")
 TOPMODULE = 'TOP'
 

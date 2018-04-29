@@ -43,6 +43,7 @@ class VCDDumper():
         instance.timeline(setting['timescale'] if 'timescale' in setting else {})
         for sig in setting['signals']:
             instance.signal(sig)
+        instance.final(setting['setting'] if 'setting' in setting else {})
         if 'dump' in setting:
             instance.dump(setting['dump'])
         return instance
@@ -62,6 +63,9 @@ class VCDDumper():
     def signal(self, args):
         "Draw Each Signal line"
         raise NotImplementedError
+
+    def final(self, args):
+        "End of Dumper, use same config as init"
 
     def dump(self, args):
         "Dump VCD to file with args"
