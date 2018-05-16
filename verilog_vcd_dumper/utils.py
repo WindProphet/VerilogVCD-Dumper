@@ -71,3 +71,7 @@ def divide_with_unit(time, base):
     # rel_t = float(time_m.group(1)) * math.pow(10, (time_u - base_u)) / float(base_m.group(1))
     rel_t = int(int(time_m.group(1)) * int(math.pow(10, (time_u - base_u))) / int(base_m.group(1)))
     return rel_t
+
+def tex_escape(value: str):
+    'tex escape special symbols'
+    return value.replace('_', '\\_')

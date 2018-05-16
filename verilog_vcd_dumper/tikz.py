@@ -13,9 +13,10 @@ class TikzDumper(dumper.VCDDumper):
         # print([self.vcd.data[i]['nets'] for i in self.vcd.data.keys()])
         self.top = 0
         self.fp = io.StringIO()
-        self.indent = 2
-        self.lineheight = 0.8
-        self.gapwidth = 0.08
+        self.indent = 2 if not 'indent' in args else args['indent']
+        self.lineheight = 0.8 if not 'lineheight' in args else args['lineheight']
+        self.gapwidth = 0.08 if not 'gapwidth' in args else args['gapwidth']
+        self.scale = 0.2 if not 'scale' in args else args['scale']
         self.write("\\begin{tikzpicture}", indent=0)
 
     def write(self, *value, indent=1, end="\n", sep=' '):
@@ -26,13 +27,12 @@ class TikzDumper(dumper.VCDDumper):
     def timeline(self, args):
         self.time_start = utils.divide_with_unit(args['start'], self.vcd.timescale)
         self.time_end = utils.divide_with_unit(args['end'], self.vcd.timescale)
-        self.scale = 0.2
 
     def signal(self, args):
         args = utils.intelligent_arg(args)
         sym, osy, index = utils.find_symbol(self.vcd, args['id'])
         if not 'label' in args:
-            label = osy['name']
+            label = utils.tex_escape(osy['name'])
         else:
             if callable(args['label']):
                 label = args['label'](osy)
